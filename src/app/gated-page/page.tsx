@@ -40,18 +40,30 @@ export default async function GatedPage() {
 }
 
 const MustLogin = () => (
-  <div className="text-center">
-    You are not logged in. <br />
-    <a href="/" className="underline">
-      Log in now
-    </a>
-  </div>
+  <main className="min-h-screen flex items-center justify-center p-4">
+    <div className="cyber-card text-center">
+      <h2 className="cyber-text text-2xl mb-6">Access Denied</h2>
+      <p className="mb-6">Authentication Required</p>
+      <a href="/" className="cyber-button inline-block">
+        Return to Login Portal
+      </a>
+    </div>
+  </main>
 );
 
-const reason = "you do not own any NFT"; // replace this with your own reason
+const reason = "you do not own the required NFT access pass";
 
 const NotAllowed = () => (
-  <div className="text-center">
-    You are logged in but you do not have access to this page because {reason}
-  </div>
+  <main className="min-h-screen flex items-center justify-center p-4">
+    <div className="cyber-card text-center">
+      <h2 className="cyber-text text-2xl mb-6">Access Restricted</h2>
+      <div className="mb-6">
+        <p className="mb-2">Authentication Verified</p>
+        <p className="text-red-400">Authorization Failed: {reason}</p>
+      </div>
+      <a href="/" className="cyber-button inline-block">
+        Return to Main Portal
+      </a>
+    </div>
+  </main>
 );

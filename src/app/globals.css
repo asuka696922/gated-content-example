@@ -2,28 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 30;
+  --background-end-rgb: 0, 10, 40;
+  --neon-blue: #00f3ff;
+  --neon-purple: #9d00ff;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Orbitron', sans-serif;
+  background: 
+    linear-gradient(45deg, rgba(var(--background-start-rgb), 0.9), rgba(var(--background-end-rgb), 0.9)),
+    url('/cyber-grid.png');
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@layer components {
+  .cyber-button {
+    @apply px-6 py-3 relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+    text-shadow: 0 0 5px var(--neon-blue);
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+  }
+
+  .cyber-button:hover {
+    @apply transform scale-105;
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+  }
+
+  /* ConnectButton custom styles */
+  :where(div[role="dialog"]) {
+    backdrop-filter: blur(16px) !important;
+    background-color: rgba(0, 10, 40, 0.9) !important;
+    border: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2) !important;
+  }
+
+  :where(button[data-theme="dark"]) {
+    font-family: 'Orbitron', sans-serif !important;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)) !important;
+    border: 1px solid var(--neon-blue) !important;
+    text-shadow: 0 0 5px var(--neon-blue) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  :where(button[data-theme="dark"]:hover) {
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5) !important;
+    transform: scale(1.02) !important;
+  }
+
+  .cyber-button-overlay {
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+  }
+
+  .cyber-text {
+    @apply font-bold;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+  }
+
+  .cyber-card {
+    @apply backdrop-blur-md rounded-lg p-6;
+    background: rgba(0, 10, 40, 0.5);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+  }
 }
 
 @layer utilities {
